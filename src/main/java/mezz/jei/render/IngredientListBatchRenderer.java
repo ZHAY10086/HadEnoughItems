@@ -169,6 +169,10 @@ public class IngredientListBatchRenderer {
                         displayItems.add(element);
                         itemToCollapsed.put(element, collapsed);
                     }
+                } else if (collapsed.size() == 1) {
+                    // Single-item group: render as a plain ingredient slot without collapsed visuals.
+                    // Not tracked in itemToCollapsed so clicks/hover treat it as a normal item.
+                    displayItems.add(collapsed.getDisplayIngredients().get(0));
                 } else {
                     // Collapsed: add the CollapsedStack itself as a single display item
                     displayItems.add(collapsed);
@@ -298,6 +302,13 @@ public class IngredientListBatchRenderer {
         // Check collapsed renderers first
         CollapsedGroupRenderer collapsedHovered = getHoveredCollapsed(mouseX, mouseY);
         if (collapsedHovered != null) {
+            // If the search has filtered this group to a single item, act as if the user
+            // clicked that item directly — no expand step needed.
+            CollapsedGroupIngredient stack = collapsedHovered.getCollapsedStack();
+            if (stack.size() == 1) {
+                IIngredientListElement<?> single = stack.getDisplayIngredients().get(0);
+                return ClickedIngredient.create(single.getIngredient(), collapsedHovered.getArea());
+            }
             return collapsedHovered.getClickedIngredient();
         }
         IngredientRenderer hovered = getHovered(mouseX, mouseY);
@@ -338,13 +349,13 @@ public class IngredientListBatchRenderer {
             GlStateManager.SourceFactor.ONE,
             GlStateManager.DestFactor.ZERO
         );
-        int bgColor = 0x33555555; // subtle smoke background
-        int borderColor = 0xCC888888; // medium smoke border
-        for (List<Rectangle> slots : expandedGroupSlots.values()) {
+        for (Map.Entry<CollapsedGroupIngredient, List<Rectangle>> slots : expandedGroupSlots.entrySet()) {
+            int bgColor = slots.getKey().getBackgroundColor();
+            int borderColor = slots.getKey().getBorderColor();
             // Build a fast lookup set keyed by "x,y" to detect adjacent group slots.
             Set<String> keys = new HashSet<>();
-            for (Rectangle r : slots) keys.add(r.x + "," + r.y);
-            for (Rectangle r : slots) {
+            for (Rectangle r : slots.getValue()) keys.add(r.x + "," + r.y);
+            for (Rectangle r : slots.getValue()) {
                 // Background fill for each slot in group
                 Gui.drawRect(r.x, r.y, r.x + r.width, r.y + r.height, bgColor);
 

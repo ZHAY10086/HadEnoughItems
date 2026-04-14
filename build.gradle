@@ -245,11 +245,11 @@ compileTestJava {
     sourceCompatibility = targetCompatibility = 8
 }
 
-test {
-    javaLauncher.set(javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(8)
-    })
-}
+// test {
+//     javaLauncher.set(javaToolchains.launcherFor {
+//         languageVersion = JavaLanguageVersion.of(8)
+//     })
+// }
 
 changelog {
     header.set("[${propertyString('mod_version')}] - ${LocalDate.now().format("yyyy-MM-dd")}")

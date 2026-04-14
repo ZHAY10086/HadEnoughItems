@@ -51,6 +51,8 @@ key.jei.toggleCheatMode=切换作弊模式
 key.jei.toggleEditMode=切换隐藏/编辑模式
 key.jei.previousPage=上一页
 key.jei.nextPage=下一页
+key.hei.previousPage=上一配方分类
+key.hei.nextPage=下一配方分类
 key.jei.bookmark=添加/移除原料书签
 key.hei.bookmarkToTop=添加原料书签至顶部
 key.hei.recipeBookmark=显示/隐藏加入书签的配方
@@ -186,6 +188,12 @@ config.jei.interface.defaultFluidContainerItem.comment=在界面中点击流体�
 config.jei.misc.hideBottomLeftCornerBookmarkButton=隐藏左下角书签按钮
 config.jei.misc.hideBottomLeftCornerBookmarkButton.comment=是否隐藏左下角的书签按钮
 
+config.jei.misc.enableHistoryPanel=启用历史记录面板
+config.jei.misc.enableHistoryPanel.comment=是否启用历史记录面板
+
+config.jei.misc.isHistoryPanelOnLeft=历史记录面板置于左侧
+config.jei.misc.isHistoryPanelOnLeft.comment=历史记录面板可选择置于左侧或右侧（true = 左侧，false = 右侧）
+
 config.jei.misc.hideBottomRightCornerConfigButton=隐藏右下角配置按钮
 config.jei.misc.hideBottomRightCornerConfigButton.comment=是否隐藏右下角的配置按钮
 
@@ -233,7 +241,9 @@ hei.gui.collapsible.defaultGroup=默认
 hei.gui.collapsible.itemCount=%d 个物品
 hei.gui.collapsible.editor.title=已选物品
 hei.gui.collapsible.editor.name=名称
+hei.gui.collapsible.editor.color=颜色
 hei.gui.collapsible.editor.save=保存
+hei.gui.collapsible.editor.clear=清除
 hei.gui.collapsible.editor.selected=%d 已选择
 hei.gui.collapsible.confirmDelete=删除？
 hei.tooltip.missing_ingredients=§c缺失原料：
